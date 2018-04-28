@@ -1,1 +1,1 @@
-# etc_learn_git
+# Git/GitHub 勉強会
