@@ -42,8 +42,9 @@ class Board
   end
 
   def show_board()
+    print "    1 2 3 4 5 6 7 8\n"
     @board.slice(1...-1).each_with_index { |col, col_num|
-      print(col_num.to_s + ": ")
+      print((col_num+1).to_s + ": ")
       col.slice(1...-1).each { |row|
         print(" ")
         print(row)
@@ -55,12 +56,12 @@ class Board
   ## 指定した位置からdirection方向へ裏返せる数を走査
   def get_flip(stone, pos, direction)
     flip_count = 0
-    next_row = pos[0]
-    next_column = pos[1]
+    next_column = pos[0]
+    next_row = pos[1]
     loop do
-      next_row += direction[0]
-      next_column += direction[1]
-      next_cell = @board[next_row][next_column]
+      next_column += direction[0]
+      next_row += direction[1]
+      next_cell = @board[next_column][next_row]
       if next_cell == Stone::NONE then
         return 0
       elsif next_cell == stone then
@@ -90,7 +91,7 @@ class Board
     moves = []
     @board[1...-1].each_with_index { |col, y|
       col[1...-1].each_with_index { |row, x|
-        pos = [y, x]
+        pos = [y+1, x+1]
         flips = get_flips(stone, pos)
         if flips != ZERO_FLIP then
           moves.push(PosMoveMap::MAP.new(pos, flips))
@@ -102,9 +103,12 @@ class Board
 
   ## 指定した色で指定した場所から指定した方向へ指定回数石を裏返す
   def do_flip(stone, pos, direction, flip)
+    next_row = pos[1]
+    next_column = pos[0]
     flip.times {
-      next_pos = [pos[0] + direction[0], pos[1] + direction[1]]
-      @board[next_pos[0]][next_pos[1]] = stone
+      next_row += direction[1]
+      next_column += direction[0]
+      @board[next_column][next_row] = stone
     }
     ## TODO: カウント処理
   end
@@ -113,7 +117,7 @@ class Board
   def do_move(stone, pos_move_map)
     @board[pos_move_map.pos[0]][pos_move_map.pos[1]] = stone
     pos_move_map.flips.zip(DIRECTIONS).each { |flip, direction|
-      do_flip(stone, pos_move_map.pos, direction,flip)
+      do_flip(stone, pos_move_map.pos, direction, flip)
     }
   end
 
@@ -121,7 +125,7 @@ class Board
     count = 0
     @board[1...-1].each_with_index { |col, y|
       col[1...-1].each_with_index { |row, x|
-        if @board[y][x] == stone
+        if @board[(y+1)][(x+1)] == stone
           count += 1
         end
       }

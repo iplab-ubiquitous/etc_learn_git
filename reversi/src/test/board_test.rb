@@ -32,6 +32,9 @@ class BoardTest < Minitest::Test
     assert_equal 1, up
     bottom = board.get_flip(Stone::BLACK, [3, 4], [1, 0])
     assert_equal 1, bottom
+    board.board[6][5] = Stone::WHITE
+    up2 = board.get_flip(Stone::BLACK, [7, 5], [-1, 0])
+    assert_equal 2, up2
   end
 
   def test_board_get_flips
@@ -50,6 +53,17 @@ class BoardTest < Minitest::Test
     flips_expect = [0, 1, 0, 0, 0, 0, 0, 0]
     ## +---+---+---+
     ## | 0 | 1 | 0 |
+    ## +---+---+---+
+    ## | 0 | * | 0 |
+    ## +---+---+---+
+    ## | 0 | 0 | 0 |
+    ## +---+---+---+
+    assert_equal flips, flips_expect
+    board.board[6][5] = Stone::WHITE
+    flips = board.get_flips(Stone::BLACK, [7, 5])
+    flips_expect = [0, 2, 0, 0, 0, 0, 0, 0]
+    ## +---+---+---+
+    ## | 0 | 2 | 0 |
     ## +---+---+---+
     ## | 0 | * | 0 |
     ## +---+---+---+
@@ -139,6 +153,20 @@ class BoardTest < Minitest::Test
     assert_equal board.board, [[n,n,n,n,n,n,n,n,n,n],
                                [n,n,n,n,n,n,n,n,n,n],
                                [n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,b,n,n,n,n,n],
+                               [n,n,n,n,b,b,n,n,n,n],
+                               [n,n,n,n,b,w,n,n,n,n],
+                               [n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,n,n,n,n,n,n]]
+
+    board.board[3][4] = w
+    board.board[4][4] = w
+    board.do_move(Stone::BLACK, PosMoveMap::MAP.new([2, 4], [0, 0, 0, 0, 0, 0, 2, 0]))
+    assert_equal board.board, [[n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,n,n,n,n,n,n],
+                               [n,n,n,n,b,n,n,n,n,n],
                                [n,n,n,n,b,n,n,n,n,n],
                                [n,n,n,n,b,b,n,n,n,n],
                                [n,n,n,n,b,w,n,n,n,n],
