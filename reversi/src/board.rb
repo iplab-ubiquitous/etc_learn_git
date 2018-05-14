@@ -110,7 +110,6 @@ class Board
       next_column += direction[0]
       @board[next_column][next_row] = stone
     }
-    ## TODO: カウント処理
   end
 
   ## 指定した色で指定した場所に石を置く

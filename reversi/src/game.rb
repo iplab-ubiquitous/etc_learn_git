@@ -40,10 +40,11 @@ class Game
   end
 
   def turn_over(player)
-    if player == @black then
-      return @white
-    else
-      return @black
+    case player
+      when @black
+        @white
+      when @white
+        @black
     end
   end
 
