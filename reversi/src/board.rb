@@ -55,69 +55,67 @@ class Board
 
   ## 指定した位置からdirection方向へ裏返せる数を走査
   def get_flip(stone, pos, direction)
-    flip_count = 0
-    next_column = pos[0]
-    next_row = pos[1]
-    loop do
-      next_column += direction[0]
-      next_row += direction[1]
-      next_cell = @board[next_column][next_row]
-      if next_cell == Stone::NONE then
-        return 0
-      elsif next_cell == stone then
-        return flip_count
-      end
-      flip_count += 1
-    end
-
+    #flip_count = 0
+    #next_column = pos[0]
+    #next_row = pos[1]
+    #loop do
+    #  next_column += direction[0]
+    #  next_row += direction[1]
+    #  next_cell = @board[next_column][next_row]
+    #  if next_cell == Stone::NONE then
+    #    return 0
+    #  elsif next_cell == stone then
+    #    return flip_count
+    #  end
+    #  flip_count += 1
+    #end
   end
 
   ## 指定した位置に石を置いた時に8方向の裏返せる数を得る
   def get_flips(stone, pos)
-    flips = []
-    if @board[pos[0]][pos[1]] == Stone::NONE then
-      DIRECTIONS.each_with_index { |direction, i|
-        flips.push(get_flip(stone, pos, direction))
-      }
-      return flips
-    else
-      return ZERO_FLIP
-    end
-
+    #flips = []
+    #if @board[pos[0]][pos[1]] == Stone::NONE then
+    #  DIRECTIONS.each_with_index { |direction, i|
+    #    flips.push(get_flip(stone, pos, direction))
+    #  }
+    #  return flips
+    #else
+    #  return ZERO_FLIP
+    #end
   end
 
   ## 石を置くことができる場所の一覧を取得
   def moves(stone)
-    moves = []
-    @board[1...-1].each_with_index { |col, y|
-      col[1...-1].each_with_index { |row, x|
-        pos = [y+1, x+1]
-        flips = get_flips(stone, pos)
-        if flips != ZERO_FLIP then
-          moves.push(PosMoveMap::MAP.new(pos, flips))
-        end
-      }
-    }
-    return moves
+    #moves = []
+    #@board[1...-1].each_with_index { |col, y|
+    #  col[1...-1].each_with_index { |row, x|
+    #    pos = [y+1, x+1]
+    #    flips = get_flips(stone, pos)
+    #    if flips != ZERO_FLIP then
+    #      moves.push(PosMoveMap::MAP.new(pos, flips))
+    #    end
+    #  }
+    #}
+    #return moves
   end
 
   ## 指定した色で指定した場所から指定した方向へ指定回数石を裏返す
   def do_flip(stone, pos, direction, flip)
-    next_row = pos[1]
-    next_column = pos[0]
-    flip.times {
-      next_row += direction[1]
-      next_column += direction[0]
-      @board[next_column][next_row] = stone
-    }
+    #next_row = pos[1]
+    #next_column = pos[0]
+    #flip.times {
+    #  next_row += direction[1]
+    #  next_column += direction[0]
+    #  @board[next_column][next_row] = stone
+    #}
   end
 
   ## 指定した色で指定した場所に石を置く
   def do_move(stone, pos_move_map)
-    @board[pos_move_map.pos[0]][pos_move_map.pos[1]] = stone
-    pos_move_map.flips.zip(DIRECTIONS).each { |flip, direction|
-      do_flip(stone, pos_move_map.pos, direction, flip)
-    }
+    #@board[pos_move_map.pos[0]][pos_move_map.pos[1]] = stone
+    #pos_move_map.flips.zip(DIRECTIONS).each { |flip, direction|
+    #  do_flip(stone, pos_move_map.pos, direction, flip)
+    #}
   end
 
   def count_stone(stone)
