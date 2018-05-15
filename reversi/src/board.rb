@@ -113,10 +113,10 @@ class Board
 
   ## 指定した色で指定した場所に石を置く
   def do_move(stone, pos_move_map)
-    #@board[pos_move_map.pos[0]][pos_move_map.pos[1]] = stone
-    #pos_move_map.flips.zip(DIRECTIONS).each { |flip, direction|
-    #  do_flip(stone, pos_move_map.pos, direction, flip)
-    #}
+    @board[pos_move_map.pos[0]][pos_move_map.pos[1]] = stone
+    pos_move_map.flips.zip(DIRECTIONS).each { |flip, direction|
+     do_flip(stone, pos_move_map.pos, direction, flip)
+    }
   end
 
   def count_stone(stone)
