@@ -102,13 +102,13 @@ class Board
 
   ## 指定した色で指定した場所から指定した方向へ指定回数石を裏返す
   def do_flip(stone, pos, direction, flip)
-    #next_row = pos[1]
-    #next_column = pos[0]
-    #flip.times {
-    #  next_row += direction[1]
-    #  next_column += direction[0]
-    #  @board[next_column][next_row] = stone
-    #}
+    next_row = pos[1]
+    next_column = pos[0]
+    flip.times {
+      next_row += direction[1]
+      next_column += direction[0]
+      @board[next_column][next_row] = stone
+    }
   end
 
   ## 指定した色で指定した場所に石を置く
