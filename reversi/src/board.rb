@@ -87,17 +87,17 @@ class Board
 
   ## 石を置くことができる場所の一覧を取得
   def moves(stone)
-    #moves = []
-    #@board[1...-1].each_with_index { |col, y|
-    #  col[1...-1].each_with_index { |row, x|
-    #    pos = [y+1, x+1]
-    #    flips = get_flips(stone, pos)
-    #    if flips != ZERO_FLIP then
-    #      moves.push(PosMoveMap::MAP.new(pos, flips))
-    #    end
-    #  }
-    #}
-    #return moves
+    moves = []
+    @board[1...-1].each_with_index { |col, y|
+      col[1...-1].each_with_index { |row, x|
+        pos = [y+1, x+1]
+        flips = get_flips(stone, pos)
+        if flips != ZERO_FLIP then
+    	moves.push(PosMoveMap::MAP.new(pos, flips))
+        end
+      }
+    }
+    return moves
   end
 
   ## 指定した色で指定した場所から指定した方向へ指定回数石を裏返す
