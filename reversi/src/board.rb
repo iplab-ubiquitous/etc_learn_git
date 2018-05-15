@@ -1,3 +1,4 @@
+# coding: utf-8
 require_relative './stone'
 
 BOARD_SIZE = 8
@@ -73,15 +74,15 @@ class Board
 
   ## 指定した位置に石を置いた時に8方向の裏返せる数を得る
   def get_flips(stone, pos)
-    #flips = []
-    #if @board[pos[0]][pos[1]] == Stone::NONE then
-    #  DIRECTIONS.each_with_index { |direction, i|
-    #    flips.push(get_flip(stone, pos, direction))
-    #  }
-    #  return flips
-    #else
-    #  return ZERO_FLIP
-    #end
+    flips = []
+    if @board[pos[0]][pos[1]] == Stone::NONE then
+      DIRECTIONS.each_with_index { |direction, i|
+        flips.push(get_flip(stone, pos, direction))
+      }
+      return flips
+    else
+      return ZERO_FLIP
+    end
   end
 
   ## 石を置くことができる場所の一覧を取得
