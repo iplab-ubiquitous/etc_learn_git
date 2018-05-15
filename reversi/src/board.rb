@@ -55,20 +55,20 @@ class Board
 
   ## 指定した位置からdirection方向へ裏返せる数を走査
   def get_flip(stone, pos, direction)
-    #flip_count = 0
-    #next_column = pos[0]
-    #next_row = pos[1]
-    #loop do
-    #  next_column += direction[0]
-    #  next_row += direction[1]
-    #  next_cell = @board[next_column][next_row]
-    #  if next_cell == Stone::NONE then
-    #    return 0
-    #  elsif next_cell == stone then
-    #    return flip_count
-    #  end
-    #  flip_count += 1
-    #end
+    flip_count = 0
+    next_column = pos[0]
+    next_row = pos[1]
+    loop do
+      next_column += direction[0]
+      next_row += direction[1]
+      next_cell = @board[next_column][next_row]
+      if next_cell == Stone::NONE then
+        return 0
+      elsif next_cell == stone then
+        return flip_count
+      end
+      flip_count += 1
+    end
   end
 
   ## 指定した位置に石を置いた時に8方向の裏返せる数を得る
